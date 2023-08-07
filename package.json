@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node/dist/src/index.js",
-    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
-    "watch": "npx ts-node index.ts",
-    "build": "tsc",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "postinstall": "prisma generate"
   },
+  "type": "module",
   "keywords": [],
   "author": "StephanJ98",
   "license": "ISC",
@@ -17,9 +16,9 @@
     "@types/express": "^4.17.17",
     "@types/node": "^20.4.8",
     "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
     "prisma": "^5.1.1",
     "ts-node": "^10.9.1",
-    "tsc-watch": "^6.0.4",
     "typescript": "^5.1.6"
   },
   "dependencies": {
