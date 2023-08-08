@@ -6,14 +6,34 @@ const router = express.Router()
 
 router.post('/create', async (req, res, next) => {
     try {
-        console.log(req.body, '************')
-        const newPlant = await prisma.plant.create({
-            data: {
-                ...req.body
+        const userEmail = req.body.email
+
+        const userDB = await prisma.user.findUnique({
+            where: {
+                email: userEmail
+            },
+            select: {
+                id: true
             }
         })
 
-        res.json({ newPlant })
+        await prisma.plant.create({
+            data: {
+                userId: userDB.id,
+                name: req.body.name,
+                species: req.body.species,
+                description: req.body.description,
+                soil: req.body.soil,
+                temperature: req.body.temperature,
+                sun: req.body.sun,
+                water: req.body.water,
+                multiplication: req.body.multiplication,
+                image_url: req.body.image_url
+            }
+        })
+
+        res.sendStatus(200)
+
     } catch (error) {
         next(error.message)
     }

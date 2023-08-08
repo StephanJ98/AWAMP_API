@@ -1,6 +1,9 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
 
+import bcrypt from 'bcrypt'
+const saltRounds = 5
+
 const prisma = new PrismaClient()
 const router = express.Router()
 
@@ -18,22 +21,39 @@ router.get('/get/:email', async (req, res, next) => {
     }
 })
 
-router.post('/create', async (req, res, next) => {
-    console.log(req.body, '**************')
+router.post('/login', async (req, res, next) => {
     try {
-        const { email, password } = req.body
 
-        if (email && password) {
-            const newUser = await prisma.user.create({
-                data: {
-                    plantas: [],
-                    ...req.body
-                }
-            })
-            res.json({ newUser })
-        } else {
-            res.sendStatus(500)
-        }
+        const { email, password } = await req.body
+
+        const passDB = await prisma.user.findUnique({
+            where: {
+                email: email
+            },
+            select: {
+                password: true
+            }
+        })
+
+        if (bcrypt.compareSync(password, passDB.password)) res.sendStatus(200)
+        else res.sendStatus(401)
+    } catch (error) {
+        next(error.message)
+    }
+})
+
+router.post('/register', async (req, res, next) => {
+    try {
+        const { email, password } = await req.body
+        const hashed = bcrypt.hashSync(password, saltRounds)
+
+        await prisma.user.create({
+            data: {
+                email: email,
+                password: hashed
+            }
+        })
+        res.sendStatus(200)
     } catch (error) {
         next(error.message)
     }
