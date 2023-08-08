@@ -53,6 +53,4 @@ router.delete('/delete/:email', async (req, res, next) => {
     }
 })
 
-// Falta update
-
 export default router

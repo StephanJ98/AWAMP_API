@@ -43,21 +43,6 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-router.patch('/update/:id', async (req, res, next) => {
-    try {
-        const plant = await prisma.plant.update({
-            where: {
-                id: req.params.id
-            },
-            data: req.body
-        })
-
-        res.json({ plant })
-    } catch (error) {
-        next(error.message)
-    }
-})
-
 router.delete('/delete/:id', async (req, res, next) => {
     try {
         await prisma.plant.update({
