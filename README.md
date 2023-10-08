@@ -143,3 +143,15 @@ pnpm dev
   - **Parámetros del Cuerpo:** Objeto JSON con el especie de la planta a eliminar.
   - **Respuesta Exitosa:** Código de estado 200 y mensaje de éxito en formato JSON.
   - **Respuesta Fallida:** Código de estado 404 si la planta no se encuentra, código de estado 403 si no tiene permisos para eliminar.
+
+
+## Posibles vulnerabilidades de seguridad
+
+### 1. Falta de Validación de Datos
+El código no valida adecuadamente los datos de entrada. Por ejemplo, en las rutas de ``POST`` y ``PUT`` para usuarios y plantas, no hay validación de los datos recibidos. Es importante validar que los datos sean del tipo correcto y que cumplan con los requisitos esperados (longitud de la contraseña, formato del correo electrónico, etc.).
+
+### 2. Exposición de Datos Sensibles
+La información sensible, como las contraseñas de los usuarios, se almacena en texto plano en el servidor. Esto es extremadamente inseguro. Se debe almacenar solo hashes seguros y únicos de las contraseñas, utilizando algoritmos como bcrypt.
+
+### 3. Autenticación y Autorización Inadecuadas
+No hay un sistema adecuado de autenticación y autorización implementado en este código. Deberías considerar implementar un sistema de autenticación basado en tokens (como JWT) para asegurar las rutas y verificar las solicitudes de manera adecuada.
