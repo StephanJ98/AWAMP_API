@@ -6,7 +6,7 @@ Bienvenido a la documentación de la API Express.js para la aplicación AWAMP (A
 ## Información del Proyecto
 
 - **Nombre del Proyecto:** AWAMP API
-- **Versión:** 1.0.0
+- **Versión:** 2.0.0
 - **Autor:** StephanJ98
 - **Licencia:** ISC
 
@@ -49,7 +49,6 @@ pnpm dev
 ## Endpoints de la API
 
 ### Endpoints de Usuarios
-- **Obtener todos los usuarios:** `GET /usuarios`
 - **Obtener un usuario por correo electrónico:** `GET /usuarios/:email`
 - **Registrar un nuevo usuario:** `POST /usuarios`
 - **Actualizar datos de un usuario:** `PUT /usuarios/:email`
@@ -68,13 +67,8 @@ pnpm dev
 
 ## Detalles Endpoints de Usuarios 
 
-### 1. Obtener todos los usuarios
-  - **Endpoint:** `/usuarios`
-  - **Método:** `GET`
-  - **Descripción:** Obtiene todos los usuarios registrados.
-  - **Respuesta Exitosa:** Código de estado 200 y lista de usuarios en formato JSON.
   
-### 2. Obtener un usuario por correo electrónico
+### 1. Obtener un usuario por correo electrónico
   - **Endpoint:** `/usuarios/:email`
   - **Método:** `GET`
   - **Descripción:** Obtiene un usuario específico por su correo electrónico.
@@ -82,7 +76,7 @@ pnpm dev
   - **Respuesta Exitosa:** Código de estado 200 y datos del usuario en formato JSON.
   - **Respuesta Fallida:** Código de estado 404 si el usuario no se encuentra.
 
-### 3. Registrar un nuevo usuario
+### 2. Registrar un nuevo usuario
   - **Endpoint:** `/usuarios`
   - **Método:** `POST`
   - **Descripción:** Registra un nuevo usuario.
@@ -90,7 +84,7 @@ pnpm dev
   - **Respuesta Exitosa:** Código de estado 200 y datos del usuario registrado en formato JSON.
   - **Respuesta Fallida:** Código de estado 400 si el correo electrónico ya está registrado.
 
-### 4. Actualizar datos de un usuario
+### 3. Actualizar datos de un usuario
   - **Endpoint:** `/usuarios/:email`
   - **Método:** `PUT`
   - **Descripción:** Actualiza los datos de un usuario existente.
@@ -99,7 +93,7 @@ pnpm dev
   - **Respuesta Exitosa:** Código de estado 200 y mensaje de éxito en formato JSON.
   - **Respuesta Fallida:** Código de estado 404 si el usuario no se encuentra, código de estado 403 si no tiene permisos para actualizar.
 
-### 5. Eliminar un usuario
+### 4. Eliminar un usuario
   - **Endpoint:** `/usuarios/:email`
   - **Método:** `DELETE`
   - **Descripción:** Elimina un usuario por su correo electrónico.

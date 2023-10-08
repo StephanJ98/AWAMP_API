@@ -537,12 +537,6 @@ let plantas = [
     }
 ]
 
-console.log(plantas.length)
-
-app.get('/usuarios', (req, res) => {
-    res.json(usuarios)
-})
-
 app.get('/usuarios/:email', (req, res) => {
     const userEmail = req.params.email
     const usuario = usuarios.find(user => user.email === userEmail)
