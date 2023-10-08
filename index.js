@@ -612,10 +612,10 @@ app.post('/plantas', (req, res) => {
     }
 })
 
-app.put('/plantas/:id', (req, res) => {
-    const plantaId = req.params.id
+app.put('/plantas/:species', (req, res) => {
+    const plantaSpecies = req.params.species
+    const planta = plantas.find(p => p.species === plantaSpecies)
     const { userEmail, ...nuevosDatos } = req.body
-    const planta = plantas.find(planta => planta.id === plantaId)
 
     if (!planta) return res.status(404).json({ mensaje: 'Planta no encontrada' })
     if (planta.userEmail !== userEmail) return res.status(403).json({ mensaje: 'No tienes permisos para modificar esta planta' })
@@ -625,10 +625,10 @@ app.put('/plantas/:id', (req, res) => {
     res.json({ mensaje: 'Planta actualizada correctamente', planta })
 })
 
-app.delete('/plantas/:id', (req, res) => {
-    const plantaId = req.params.id
+app.delete('/plantas/:species', (req, res) => {
+    const plantaSpecies = req.params.species
     const { userEmail } = req.body
-    const index = plantas.findIndex(planta => planta.id === plantaId)
+    const index = plantas.findIndex(planta => planta.species === plantaSpecies)
 
     if (index === -1) return res.status(404).json({ mensaje: 'Planta no encontrada' })
 

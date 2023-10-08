@@ -58,8 +58,8 @@ pnpm dev
 - **Obtener todas las plantas:** `GET /plantas`
 - **Obtener una planta por especie:** `GET /plantas/:species`
 - **Registrar una nueva planta:** `POST /plantas`
-- **Actualizar datos de una planta:** `PUT /plantas/:id`
-- **Eliminar una planta:** `DELETE /plantas/:id`
+- **Actualizar datos de una planta:** `PUT /plantas/:species`
+- **Eliminar una planta:** `DELETE /plantas/:species`
 
 ---
 
@@ -126,10 +126,10 @@ pnpm dev
   - **Respuesta Fallida:** Código de estado 400 si la especie ya está registrada.
 
 ### 4. Actualizar datos de una planta
-  - **Endpoint:** `/plantas/:id`
+  - **Endpoint:** `/plantas/:species`
   - **Método:** `PUT`
   - **Descripción:** Actualiza los datos de una planta existente.
-  - **Parámetros de Ruta:** `id` (ID de la planta)
+  - **Parámetros de Ruta:** `species` (Especie de la planta)
   - **Datos del Cuerpo:** Objeto JSON con los campos
 
  a actualizar (name, description, etc.).
@@ -137,9 +137,9 @@ pnpm dev
   - **Respuesta Fallida:** Código de estado 404 si la planta no se encuentra, código de estado 403 si no tiene permisos para actualizar.
 
 ### 5. Eliminar una planta
-  - **Endpoint:** `/plantas/:id`
+  - **Endpoint:** `/plantas/:species`
   - **Método:** `DELETE`
-  - **Descripción:** Elimina una planta por su ID.
-  - **Parámetros del Cuerpo:** Objeto JSON con el ID de la planta a eliminar.
+  - **Descripción:** Elimina una planta por su especie.
+  - **Parámetros del Cuerpo:** Objeto JSON con el especie de la planta a eliminar.
   - **Respuesta Exitosa:** Código de estado 200 y mensaje de éxito en formato JSON.
   - **Respuesta Fallida:** Código de estado 404 si la planta no se encuentra, código de estado 403 si no tiene permisos para eliminar.
