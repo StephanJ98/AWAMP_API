@@ -10,7 +10,14 @@ let usuarios = [
     {
         email: 'test@test.com',
         nombre: 'Test',
-        password: 'hashedpassword1',
+        password: 'test',
+        createdAt: '2023-10-07T08:30:00Z',
+        updatedAt: '2023-10-07T10:45:00Z'
+    },
+    {
+        email: 'jorge@test.com',
+        nombre: 'Jorge',
+        password: '1234',
         createdAt: '2023-10-07T08:30:00Z',
         updatedAt: '2023-10-07T10:45:00Z'
     }
@@ -561,33 +568,33 @@ app.post('/usuarios', (req, res) => {
 })
 
 app.put('/usuarios/:email', (req, res) => {
-    const userEmail = req.params.email;
-    const { email, ...nuevosDatos } = req.body;
+    const userEmail = req.params.email
+    const { email, ...nuevosDatos } = req.body
 
     if (userEmail !== email) return res.status(403).json({ mensaje: 'No tienes permisos para modificar este usuario' })
 
-    const usuario = usuarios.find(usuario => usuario.email === userEmail);
+    const usuario = usuarios.find(usuario => usuario.email === userEmail)
 
     if (!usuario) return res.status(404).json({ mensaje: 'Usuario no encontrado' })
 
-    usuario.updatedAt = new Date().toISOString();
-    Object.assign(usuario, nuevosDatos);
-    res.json({ mensaje: 'Usuario actualizado correctamente', usuario });
-});
+    usuario.updatedAt = new Date().toISOString()
+    Object.assign(usuario, nuevosDatos)
+    res.json({ mensaje: 'Usuario actualizado correctamente', usuario })
+})
 
 app.delete('/usuarios/:email', (req, res) => {
-    const userEmail = req.params.email;
+    const userEmail = req.params.email
 
     if (userEmail !== req.body.email) return res.status(403).json({ mensaje: 'No tienes permisos para eliminar este usuario' })
-    const index = usuarios.findIndex(usuario => usuario.email === userEmail);
+    const index = usuarios.findIndex(usuario => usuario.email === userEmail)
     if (index === -1) return res.status(404).json({ mensaje: 'Usuario no encontrado' })
 
-    usuarios.splice(index, 1);
+    usuarios.splice(index, 1)
 
     // Elimina las plantas asociadas a este usuario
-    plantas = plantas.filter(planta => planta.userEmail !== userEmail);
-    res.json({ mensaje: 'Usuario eliminado correctamente' });
-});
+    plantas = plantas.filter(planta => planta.userEmail !== userEmail)
+    res.json({ mensaje: 'Usuario eliminado correctamente' })
+})
 
 app.get('/plantas', (req, res) => {
     res.json(plantas)
